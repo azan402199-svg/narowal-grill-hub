@@ -112,7 +112,8 @@ function gooeyAdded(btn: HTMLElement, reduce: boolean) {
   pill.setAttribute("aria-hidden", "true");
   pill.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Added';
   btn.appendChild(pill);
-  window.setTimeout(() => pill.remove(), 1700);
+  window.setTimeout(() => pill.classList.add("out"), 2300);
+  window.setTimeout(() => pill.remove(), 2700);
   if (reduce) return;
 
   const r = btn.getBoundingClientRect();
@@ -126,13 +127,15 @@ function gooeyAdded(btn: HTMLElement, reduce: boolean) {
     const a = ((360 + noise(8)) / count) * i * (Math.PI / 180);
     const d0 = 90, d1 = 10 + noise(7);
     const t = 1200 + noise(600);
+    fx.style.setProperty("--time", "1500ms");
     const rot = noise(10);
     const p = document.createElement("span");
     p.className = "atc-particle";
-    p.style.cssText = `--sx:${d0 * Math.cos(a)}px;--sy:${d0 * Math.sin(a)}px;--ex:${d1 * Math.cos(a)}px;--ey:${d1 * Math.sin(a)}px;--time:${t}ms;--scale:${1 + noise(0.2)};--rotate:${(rot > 0 ? rot + 5 : rot - 5) * 10}deg;--c:var(--atc-c${1 + (i % 3)})`;
+    p.style.cssText = `--sx:${d0 * Math.cos(a)}px;--sy:${d0 * Math.sin(a)}px;--ex:${d1 * Math.cos(a)}px;--ey:${d1 * Math.sin(a)}px;--time:${t}ms;--scale:${1 + noise(0.2)};--rotate:${(rot > 0 ? rot + 5 : rot - 5) * 10}deg`;
     p.appendChild(document.createElement("i"));
     fx.appendChild(p);
   }
   requestAnimationFrame(() => fx.classList.add("active"));
-  window.setTimeout(() => fx.remove(), 2000);
+  window.setTimeout(() => fx.classList.add("out"), 2300);
+  window.setTimeout(() => fx.remove(), 2700);
 }
