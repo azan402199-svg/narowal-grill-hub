@@ -303,61 +303,48 @@ function LoginPage() {
 
           {/* Channel selector — shown only before code is sent */}
           {!codeSent && (
-            <div className="flex items-center gap-3 text-[12px] font-semibold text-charcoal/60">
-              <span>Send via:</span>
-              <button
-                type="button"
-                onClick={() => setOtpChannel("whatsapp")}
-                className={cn(
-                  "flex items-center gap-1.5 px-3 py-1.5 rounded-md border transition-colors",
-                  otpChannel === "whatsapp"
-                    ? "border-green-600/60 bg-green-600/10 text-green-700"
-                    : "border-charcoal/20 hover:border-charcoal/40 text-charcoal/50"
-                )}
-              >
-                📱 WhatsApp
-              </button>
-              <button
-                type="button"
-                onClick={() => setOtpChannel("sms")}
-                className={cn(
-                  "flex items-center gap-1.5 px-3 py-1.5 rounded-md border transition-colors",
-                  otpChannel === "sms"
-                    ? "border-blue-600/60 bg-blue-600/10 text-blue-700"
-                    : "border-charcoal/20 hover:border-charcoal/40 text-charcoal/50"
-                )}
-              >
-                💬 SMS
-              </button>
+            <div className="otp-switch-row">
+              <span className="text-[12px] font-semibold text-charcoal/60">Send via</span>
+              <div className="otp-switch" data-active={otpChannel} role="radiogroup" aria-label="Code delivery">
+                <span className="otp-switch-pill" aria-hidden />
+                {(["whatsapp", "sms"] as const).map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    role="radio"
+                    aria-checked={otpChannel === c}
+                    onClick={() => setOtpChannel(c)}
+                    className="otp-switch-opt"
+                    data-on={otpChannel === c || undefined}
+                  >
+                    <span key={`${c}-${otpChannel === c}`} className="otp-switch-ico" aria-hidden>
+                      {c === "whatsapp" ? "📱" : "💬"}
+                    </span>
+                    {c === "whatsapp" ? "WhatsApp" : "SMS"}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
 
-          <p className="text-[12px] font-semibold text-charcoal/55">
+          <p key={otpChannel} className="otp-switch-hint text-[12px] font-semibold text-charcoal/55">
             {otpChannel === "sms"
               ? "Code arrives by SMS. If WhatsApp fails, SMS fallback is automatic."
               : "Code arrives on WhatsApp. No account needed — your number is your login."}
           </p>
 
           <SendPlaneButton
-            sending={isSubmitting && !codeSent}
+            sending={isSubmitting}
             sent={codeSent}
-            showPlane={!codeSent && lockedFor <= 0}
+            doneLabel="Sent!"
+            showPlane={lockedFor <= 0}
             disabled={isSubmitting || lockedFor > 0}
           >
-            {lockedFor > 0 ? (
-              `Too many tries — wait ${lockedFor}s`
-            ) : codeSent ? (
-              isSubmitting ? (
-                <>
-                  <span className="btn-spinner" aria-hidden />
-                  <span className="btn-dots">Checking your code</span>
-                </>
-              ) : (
-                "Verify & sign in"
-              )
-            ) : (
-              `Send me a code via ${otpChannel === "sms" ? "SMS" : "WhatsApp"}`
-            )}
+            {lockedFor > 0
+              ? `Too many tries — wait ${lockedFor}s`
+              : codeSent
+                ? "Verify & sign in"
+                : `Send me a code via ${otpChannel === "sms" ? "SMS" : "WhatsApp"}`}
           </SendPlaneButton>
         </form>
       )}
