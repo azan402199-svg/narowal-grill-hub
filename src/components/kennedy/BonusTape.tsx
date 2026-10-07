@@ -72,7 +72,6 @@ export function BonusTape() {
       {started && <div className="offer-truck" aria-hidden="true">
                 <video
           src={truckVideo.url}
-          poster={truck.url}
           autoPlay
           muted
           loop
