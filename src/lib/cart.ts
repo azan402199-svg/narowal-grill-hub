@@ -1,3 +1,4 @@
+import { flyFromLastTap } from "./fly-to-cart";
 import { useCallback, useEffect, useState } from "react";
 
 import { DISHES, getDish, type Dish } from "@/lib/menu";
@@ -77,6 +78,7 @@ export function loadCart(): CartLine[] {
 }
 
 export function addToCart(slug: string, size?: string, qty = 1, sizeId?: number) {
+  flyFromLastTap();
   const dish = getDish(slug) || DISHES.find((d) => d.slug === slug);
   const options = dish ? dishSizes(dish) : [];
   const chosen =

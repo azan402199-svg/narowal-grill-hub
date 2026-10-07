@@ -55,6 +55,7 @@ export function CartDock() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label={`Cart, ${count} items`}
+        data-cart-target=""
         animate={bump ? { scale: [1, 1.16, 1] } : { scale: 1 }}
         transition={{ duration: 0.4 }}
         className="fixed bottom-5 left-5 z-[160] hidden h-14 w-14 items-center justify-center rounded-full bg-flame text-cream shadow-[0_16px_34px_rgba(180,40,20,0.4)] sm:flex"
@@ -85,6 +86,7 @@ export function CartDock() {
                 aria-label={`Open cart, ${count} items`}
               >
                 <motion.span
+                  data-cart-target=""
                   animate={bump ? { scale: [1, 1.18, 1] } : { scale: 1 }}
                   transition={{ duration: 0.4 }}
                   className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-flame text-cream"
