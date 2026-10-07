@@ -1,6 +1,5 @@
 import { Flame, Gift, Pizza, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import truck from "@/assets/kennedy-truck.webp.asset.json";
 import truckVideo from "@/assets/kennedy-truck.webm.asset.json";
 
 type Item = { label: string; Icon: typeof Flame };
@@ -72,7 +71,6 @@ export function BonusTape() {
       {started && <div className="offer-truck" aria-hidden="true">
                 <video
           src={truckVideo.url}
-          poster={truck.url}
           autoPlay
           muted
           loop
