@@ -306,7 +306,7 @@
     align-content: center;
     gap: 0;
     --offer-truck-width: 210px;
-    --offer-cycle-duration: 10.91s;
+    --offer-cycle-duration: 50s;
   }
   .truck-tape-section .ticket {
     clip-path: inset(0 100% 0 0);
@@ -359,12 +359,12 @@
   }
   @keyframes offer-truck-drive {
     0% { transform: translate3d(-100%, -50%, 0); }
-    80%, 100% { transform: translate3d(100vw, -50%, 0); }
+    17.4%, 100% { transform: translate3d(100vw, -50%, 0); }
   }
   @keyframes offer-tape-unroll {
-    0%, 12% { clip-path: inset(0 100% 0 0); opacity: 1; }
-    80%, 88% { clip-path: inset(0 0 0 0); opacity: 1; }
-    96%, 100% { clip-path: inset(0 0 0 0); opacity: 0; }
+    0%, 2.4% { clip-path: inset(0 100% 0 0); }
+    17.4%, 97% { clip-path: inset(0 0 0 0); }
+    100% { clip-path: inset(0 0 0 100%); }
   }
   @media (max-width: 639px) {
     .tape-section.truck-tape-section { --offer-truck-width: 154px; padding: 0.75rem 0; margin: 0; gap: 0; min-height: 0; }

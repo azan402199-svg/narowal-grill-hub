@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "asset_id": "9a06637d-d934-471a-b15b-20c57cea8488",
+  "asset_id": "cb6f870c-97d0-4126-b947-8be9e3f8d973",
   "project_id": "31cf095e-7e16-40e4-8fd0-25da0f85b2ff",
-  "url": "/__l5e/assets-v1/9a06637d-d934-471a-b15b-20c57cea8488/kennedy-truck-steady.webm",
-  "r2_key": "a/v1/31cf095e-7e16-40e4-8fd0-25da0f85b2ff/9a06637d-d934-471a-b15b-20c57cea8488/kennedy-truck-steady.webm",
-  "original_filename": "kennedy-truck-steady.webm",
-  "size": 274859,
+  "url": "/__l5e/assets-v1/cb6f870c-97d0-4126-b947-8be9e3f8d973/kennedy-truck-fixed.webm",
+  "r2_key": "a/v1/31cf095e-7e16-40e4-8fd0-25da0f85b2ff/cb6f870c-97d0-4126-b947-8be9e3f8d973/kennedy-truck-fixed.webm",
+  "original_filename": "kennedy-truck-fixed.webm",
+  "size": 265398,
   "content_type": "video/webm",
-  "created_at": "2026-10-07T16:33:14Z"
+  "created_at": "2026-10-07T16:40:02Z"
 }
