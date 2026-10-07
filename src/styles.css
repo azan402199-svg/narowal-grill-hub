@@ -338,7 +338,7 @@
     width: var(--offer-truck-width);
     bottom: 0;
     left: 0;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 7 / 5;
     transform: translate3d(-100%, 0, 0);
     will-change: transform;
     backface-visibility: hidden;
