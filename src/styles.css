@@ -4369,7 +4369,9 @@ img { image-rendering: auto; }
   transition: transform .45s cubic-bezier(.65,0,.35,1), opacity .3s ease;
 }
 .send-plane-sent { position: absolute; inset: 0; opacity: 0; transform: translateX(-40%); }
-.send-plane-mini { width: 1.05rem; height: 1.05rem; transform: rotate(-12deg); }
+.send-plane-mini { width: 1.05rem; height: 1.05rem; transform: rotate(45deg); }
+.send-plane-btn:hover:not(:disabled) .send-plane-mini { animation: send-plane-hover .9s ease-in-out infinite; }
+@keyframes send-plane-hover { 50% { transform: rotate(45deg) translate(0,-3px); } }
 .send-plane-tick { width: 1.3rem; height: 1.3rem; stroke-dasharray: 26; stroke-dashoffset: 26; }
 
 .send-plane-sky { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; z-index: 5; }
@@ -4383,7 +4385,7 @@ img { image-rendering: auto; }
   position: absolute; left: 0; top: 0; width: 22px; height: 22px; margin: -11px 0 0 -11px;
   color: var(--color-flame); opacity: 0;
   offset-path: path("M0,0 C30,-50 90,-95 120,-60 C150,-25 70,30 30,20 C0,12 -10,-10 0,0");
-  offset-rotate: auto 45deg; offset-distance: 0%;
+  offset-rotate: auto 90deg; offset-distance: 0%;
   filter: drop-shadow(0 3px 6px rgb(0 0 0 / .35));
 }
 .send-plane-flyer svg { width: 100%; height: 100%; }
@@ -4418,4 +4420,37 @@ img { image-rendering: auto; }
   .send-plane-btn, .send-plane-label, .send-plane-sent { transition: none !important; }
   .send-plane-flyer, .send-plane-route path, .send-plane-btn, .send-plane-tick { animation: none !important; }
   .send-plane-tick { stroke-dashoffset: 0; }
+}
+
+/* ---------- OTP channel switch ---------- */
+.otp-switch-row { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.otp-switch {
+  position: relative; display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: .6rem;
+  background: color-mix(in oklab, var(--color-charcoal) 7%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-charcoal) 14%, transparent);
+  animation: auth-rise .5s both;
+}
+.otp-switch-pill {
+  position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: .45rem;
+  background: linear-gradient(135deg, var(--color-flame), color-mix(in oklab, var(--color-flame) 70%, black));
+  box-shadow: 0 6px 16px -6px color-mix(in oklab, var(--color-flame) 80%, transparent), inset 0 1px 0 rgb(255 255 255 / .25);
+  transition: transform .5s cubic-bezier(.34,1.56,.64,1);
+}
+.otp-switch[data-active="sms"] .otp-switch-pill { transform: translateX(100%); }
+.otp-switch-opt {
+  position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  padding: .45rem 1rem; font-size: 12px; font-weight: 800; letter-spacing: .02em;
+  color: color-mix(in oklab, var(--color-charcoal) 55%, transparent); transition: color .3s ease, transform .15s ease;
+}
+.otp-switch-opt:active { transform: scale(.93); }
+.otp-switch-opt[data-on] { color: var(--color-cream, #fff); }
+.otp-switch-opt[data-on] .otp-switch-ico { animation: otp-ico-pop .6s cubic-bezier(.34,1.56,.64,1); }
+.otp-switch-opt:not([data-on]):hover .otp-switch-ico { animation: otp-ico-wiggle .5s ease; }
+.otp-switch-ico { display: inline-block; }
+.otp-switch-hint { animation: otp-hint-in .4s ease both; }
+@keyframes otp-ico-pop { 0% { transform: scale(.4) rotate(-25deg); } 60% { transform: scale(1.35) rotate(10deg); } 100% { transform: none; } }
+@keyframes otp-ico-wiggle { 25% { transform: rotate(-14deg); } 75% { transform: rotate(14deg); } }
+@keyframes otp-hint-in { from { opacity: 0; transform: translateY(6px); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .otp-switch, .otp-switch-pill, .otp-switch-ico, .otp-switch-hint, .send-plane-mini { animation: none !important; transition: none !important; }
 }

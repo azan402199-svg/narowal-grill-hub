@@ -7,23 +7,38 @@ type Props = {
   sent: boolean;
   disabled?: boolean;
   showPlane?: boolean;
+  doneLabel?: string;
   children: ReactNode;
 };
 
-/** Paper-plane send button: squeezes into a bubble, plane loops out, lands as a tick. */
-export function SendPlaneButton({ sending, sent, disabled, showPlane = true, children }: Props) {
+/** The paper plane from the reference "Click to Send" design (points up). */
+const PLANE_D =
+  "M560.611 481.384C562.003 479.263 565.113 479.263 566.505 481.384L607.063 543.177C615.657 556.272 607.507 573.375 592.766 575.676L566.422 557.462V510.018C566.422 508.436 565.14 507.154 563.558 507.154C561.976 507.154 560.693 508.436 560.693 510.018V557.462L534.349 575.676C519.609 573.375 511.459 556.272 520.053 543.177L560.611 481.384Z";
+
+function Plane({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="514 476 100 104" aria-hidden>
+      <path d={PLANE_D} fill="currentColor" />
+    </svg>
+  );
+}
+
+/** Paper-plane button: squeezes into a bubble, plane loops out, lands as a tick. */
+export function SendPlaneButton({ sending, sent, disabled, showPlane = true, doneLabel = "Sent!", children }: Props) {
   const [phase, setPhase] = useState<"idle" | "flying" | "sent">("idle");
   const wasSending = useRef(false);
+  const sentAtStart = useRef(sent);
 
   useEffect(() => {
     if (sending) {
+      if (!wasSending.current) sentAtStart.current = sent;
       wasSending.current = true;
       setPhase("flying");
-      return;
+      return undefined;
     }
     if (wasSending.current) {
       wasSending.current = false;
-      if (sent) {
+      if (sent && !sentAtStart.current) {
         setPhase("sent");
         const t = setTimeout(() => setPhase("idle"), 1700);
         return () => clearTimeout(t);
@@ -35,23 +50,16 @@ export function SendPlaneButton({ sending, sent, disabled, showPlane = true, chi
 
   return (
     <div className="send-plane-wrap" data-phase={phase}>
-      <button
-        type="submit"
-        disabled={disabled}
-        aria-busy={sending}
-        className={cn("auth-cta send-plane-btn")}
-      >
+      <button type="submit" disabled={disabled} aria-busy={sending} className={cn("auth-cta send-plane-btn")}>
         <span className="send-plane-label">
-          {showPlane && <svg className="send-plane-mini" viewBox="0 0 24 24" aria-hidden>
-            <path d="M3 11.5 21 3l-6.5 18-3-7.5L3 11.5Z" fill="currentColor" />
-          </svg>}
+          {showPlane && <Plane className="send-plane-mini" />}
           {children}
         </span>
         <span className="send-plane-sent" aria-hidden={phase !== "sent"}>
           <svg viewBox="0 0 24 24" className="send-plane-tick" aria-hidden>
             <path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          Sent!
+          {doneLabel}
         </span>
       </button>
 
@@ -60,9 +68,7 @@ export function SendPlaneButton({ sending, sent, disabled, showPlane = true, chi
           <path d="M0,0 C30,-50 90,-95 120,-60 C150,-25 70,30 30,20 C0,12 -10,-10 0,0" />
         </svg>
         <span className="send-plane-flyer">
-          <svg viewBox="0 0 24 24">
-            <path d="M3 11.5 21 3l-6.5 18-3-7.5L3 11.5Z" fill="currentColor" />
-          </svg>
+          <Plane />
         </span>
       </div>
     </div>
