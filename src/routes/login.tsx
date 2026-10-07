@@ -16,6 +16,7 @@ import {
 } from "@/lib/auth";
 import { API_SLOW_DONE_EVENT, API_SLOW_EVENT, ApiError } from "@/lib/api/client";
 import { cn } from "@/lib/utils";
+import { SendPlaneButton } from "@/components/auth/SendPlaneButton";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -337,23 +338,27 @@ function LoginPage() {
               : "Code arrives on WhatsApp. No account needed — your number is your login."}
           </p>
 
-          <button
-            type="submit"
-            disabled={isSubmitting || lockedFor > 0}
-            aria-busy={isSubmitting}
-            className={cn("auth-cta", isSubmitting && "btn-pending")}
-          >
-            {isSubmitting ? <span className="btn-spinner" aria-hidden /> : <span aria-hidden>{otpChannel === "sms" ? "💬" : "📱"}</span>}
-            {isSubmitting ? (
-              <span className="btn-dots">{codeSent ? "Checking your code" : "Sending code"}</span>
-            ) : lockedFor > 0 ? (
-              `Too many tries — wait ${lockedFor}s`
-            ) : codeSent ? (
-              "Verify & sign in"
-            ) : (
-              `Send me a code via ${otpChannel === "sms" ? "SMS" : "WhatsApp"}`
-            )}
-          </button>
+          {!codeSent || (isSubmitting === false && lockedFor > 0) ? (
+            <SendPlaneButton
+              sending={isSubmitting && !codeSent}
+              sent={codeSent}
+              disabled={isSubmitting || lockedFor > 0}
+            >
+              {lockedFor > 0
+                ? `Too many tries — wait ${lockedFor}s`
+                : `Send me a code via ${otpChannel === "sms" ? "SMS" : "WhatsApp"}`}
+            </SendPlaneButton>
+          ) : (
+            <button
+              type="submit"
+              disabled={isSubmitting || lockedFor > 0}
+              aria-busy={isSubmitting}
+              className={cn("auth-cta", isSubmitting && "btn-pending")}
+            >
+              {isSubmitting ? <span className="btn-spinner" aria-hidden /> : null}
+              {isSubmitting ? <span className="btn-dots">Checking your code</span> : "Verify & sign in"}
+            </button>
+          )}
         </form>
       )}
 
