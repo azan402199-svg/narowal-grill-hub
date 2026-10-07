@@ -338,27 +338,27 @@ function LoginPage() {
               : "Code arrives on WhatsApp. No account needed — your number is your login."}
           </p>
 
-          {!codeSent || (isSubmitting === false && lockedFor > 0) ? (
-            <SendPlaneButton
-              sending={isSubmitting && !codeSent}
-              sent={codeSent}
-              disabled={isSubmitting || lockedFor > 0}
-            >
-              {lockedFor > 0
-                ? `Too many tries — wait ${lockedFor}s`
-                : `Send me a code via ${otpChannel === "sms" ? "SMS" : "WhatsApp"}`}
-            </SendPlaneButton>
-          ) : (
-            <button
-              type="submit"
-              disabled={isSubmitting || lockedFor > 0}
-              aria-busy={isSubmitting}
-              className={cn("auth-cta", isSubmitting && "btn-pending")}
-            >
-              {isSubmitting ? <span className="btn-spinner" aria-hidden /> : null}
-              {isSubmitting ? <span className="btn-dots">Checking your code</span> : "Verify & sign in"}
-            </button>
-          )}
+          <SendPlaneButton
+            sending={isSubmitting && !codeSent}
+            sent={codeSent}
+            showPlane={!codeSent && lockedFor <= 0}
+            disabled={isSubmitting || lockedFor > 0}
+          >
+            {lockedFor > 0 ? (
+              `Too many tries — wait ${lockedFor}s`
+            ) : codeSent ? (
+              isSubmitting ? (
+                <>
+                  <span className="btn-spinner" aria-hidden />
+                  <span className="btn-dots">Checking your code</span>
+                </>
+              ) : (
+                "Verify & sign in"
+              )
+            ) : (
+              `Send me a code via ${otpChannel === "sms" ? "SMS" : "WhatsApp"}`
+            )}
+          </SendPlaneButton>
         </form>
       )}
 

@@ -6,11 +6,12 @@ type Props = {
   /** flips true once the code was delivered — triggers the "Sent!" reveal */
   sent: boolean;
   disabled?: boolean;
+  showPlane?: boolean;
   children: ReactNode;
 };
 
 /** Paper-plane send button: squeezes into a bubble, plane loops out, lands as a tick. */
-export function SendPlaneButton({ sending, sent, disabled, children }: Props) {
+export function SendPlaneButton({ sending, sent, disabled, showPlane = true, children }: Props) {
   const [phase, setPhase] = useState<"idle" | "flying" | "sent">("idle");
   const wasSending = useRef(false);
 
@@ -40,9 +41,9 @@ export function SendPlaneButton({ sending, sent, disabled, children }: Props) {
         className={cn("auth-cta send-plane-btn")}
       >
         <span className="send-plane-label">
-          <svg className="send-plane-mini" viewBox="0 0 24 24" aria-hidden>
+          {showPlane && <svg className="send-plane-mini" viewBox="0 0 24 24" aria-hidden>
             <path d="M3 11.5 21 3l-6.5 18-3-7.5L3 11.5Z" fill="currentColor" />
-          </svg>
+          </svg>}
           {children}
         </span>
         <span className="send-plane-sent" aria-hidden={phase !== "sent"}>
