@@ -116,6 +116,14 @@ function gooeyAdded(btn: HTMLElement, reduce: boolean) {
   window.setTimeout(() => pill.remove(), 2700);
   if (reduce) return;
 
+  if (!document.getElementById("atc-goo-filter")) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("aria-hidden", "true");
+    svg.style.cssText = "position:absolute;width:0;height:0";
+    svg.innerHTML =
+      '<filter id="atc-goo-filter" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter>';
+    document.body.appendChild(svg);
+  }
   const r = btn.getBoundingClientRect();
   const fx = document.createElement("span");
   fx.className = "atc-goo";
