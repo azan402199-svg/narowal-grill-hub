@@ -215,7 +215,7 @@ function LoginPage() {
         </>
       }
     >
-      <div className="mb-5 grid grid-cols-2 gap-1 rounded-2xl bg-charcoal/5 p-1">
+      <div className="mb-5 grid grid-cols-2 gap-1 rounded-md bg-charcoal/5 p-1">
         {(["phone", "password"] as const).map((m) => (
           <button
             key={m}
@@ -229,7 +229,7 @@ function LoginPage() {
               );
             }}
             className={cn(
-              "rounded-xl px-3 py-2 text-[12px] font-extrabold transition",
+              "rounded-md px-3 py-2 text-[12px] font-extrabold transition",
               mode === m ? "bg-white text-flame shadow-sm" : "text-charcoal/55 hover:text-charcoal",
             )}
           >
@@ -269,7 +269,7 @@ function LoginPage() {
               <motion.div
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="rounded-2xl border border-flame/20 bg-flame/5 p-3"
+                className="rounded-md border border-flame/20 bg-flame/5 p-3"
               >
                 <div className="mb-2 flex items-center gap-2 font-display text-[11px] font-extrabold uppercase text-charcoal/70">
                   <KeyRound className="h-4 w-4 text-flame" aria-hidden="true" />
@@ -308,7 +308,7 @@ function LoginPage() {
                 type="button"
                 onClick={() => setOtpChannel("whatsapp")}
                 className={cn(
-                  "flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-colors",
+                  "flex items-center gap-1.5 px-3 py-1.5 rounded-md border transition-colors",
                   otpChannel === "whatsapp"
                     ? "border-green-600/60 bg-green-600/10 text-green-700"
                     : "border-charcoal/20 hover:border-charcoal/40 text-charcoal/50"
@@ -320,7 +320,7 @@ function LoginPage() {
                 type="button"
                 onClick={() => setOtpChannel("sms")}
                 className={cn(
-                  "flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-colors",
+                  "flex items-center gap-1.5 px-3 py-1.5 rounded-md border transition-colors",
                   otpChannel === "sms"
                     ? "border-blue-600/60 bg-blue-600/10 text-blue-700"
                     : "border-charcoal/20 hover:border-charcoal/40 text-charcoal/50"
@@ -425,7 +425,7 @@ function LoginPage() {
         </div>
 
         {isWaking && (
-          <p className="rounded-xl bg-flame/10 px-3 py-2 text-[12px] font-semibold text-charcoal/80">
+          <p className="rounded-md bg-flame/10 px-3 py-2 text-[12px] font-semibold text-charcoal/80">
             Waking up the kitchen… our server was asleep, this can take up to 30 seconds.
           </p>
         )}

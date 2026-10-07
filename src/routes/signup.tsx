@@ -119,11 +119,11 @@ function SignupPage() {
         }
       >
         <div className="space-y-5">
-          <div className="rounded-[1.75rem] border-2 border-charcoal/10 bg-white/80 p-5 text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-flame/12 text-flame">
+          <div className="rounded-md border-2 border-charcoal/10 bg-white/80 p-5 text-center">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-md bg-flame/12 text-flame">
               <Clock className="h-6 w-6 animate-pulse" />
             </div>
-            <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-flame/10 px-3 py-1 font-display text-[10px] font-extrabold uppercase tracking-[0.16em] text-flame">
+            <span className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-flame/10 px-3 py-1 font-display text-[10px] font-extrabold uppercase tracking-[0.16em] text-flame">
               Pending Admin Approval
             </span>
             <h3 className="mt-3 font-display text-base font-extrabold uppercase text-charcoal">
@@ -132,7 +132,7 @@ function SignupPage() {
             <p className="mt-2 font-body text-xs leading-relaxed text-charcoal/70">
               Aapka <strong className="text-charcoal">{ROLE_COPY[pendingApproval.role].label}</strong> account register ho gaya hai. Kennedy Moon Grill admin team aapki application verify karke account activate karegi.
             </p>
-            <div className="mt-4 rounded-xl border border-charcoal/8 bg-cream/70 p-3 text-left font-body text-[11px] text-charcoal/65">
+            <div className="mt-4 rounded-md border border-charcoal/8 bg-cream/70 p-3 text-left font-body text-[11px] text-charcoal/65">
               <p className="font-semibold text-charcoal">Next Steps:</p>
               <p className="mt-0.5">1. Admin review & profile verification.</p>
               <p>2. Once approved, login with your email & password to access your console.</p>
@@ -142,13 +142,13 @@ function SignupPage() {
           <div className="grid gap-2 sm:grid-cols-2">
             <Link
               to="/login"
-              className="flex items-center justify-center gap-2 rounded-full bg-charcoal px-5 py-3 font-display text-[11px] font-extrabold uppercase tracking-[0.16em] text-cream transition-colors hover:bg-flame"
+              className="flex items-center justify-center gap-2 rounded-md bg-charcoal px-5 py-3 font-display text-[11px] font-extrabold uppercase tracking-[0.16em] text-cream transition-colors hover:bg-flame"
             >
               Go to Sign in <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <Link
               to="/"
-              className="flex items-center justify-center gap-2 rounded-full border-2 border-charcoal/12 bg-white px-5 py-3 font-display text-[11px] font-extrabold uppercase tracking-[0.16em] text-charcoal/70 transition-colors hover:border-flame hover:text-flame"
+              className="flex items-center justify-center gap-2 rounded-md border-2 border-charcoal/12 bg-white px-5 py-3 font-display text-[11px] font-extrabold uppercase tracking-[0.16em] text-charcoal/70 transition-colors hover:border-flame hover:text-flame"
             >
               Explore Menu
             </Link>
@@ -175,13 +175,13 @@ function SignupPage() {
           <div className="grid gap-2 sm:grid-cols-2">
             <Link
               to="/login"
-              className="flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-charcoal px-5 font-display text-[11px] font-extrabold tracking-[0.16em] text-cream uppercase transition-colors hover:bg-flame"
+              className="flex min-h-[44px] items-center justify-center gap-2 rounded-md bg-charcoal px-5 font-display text-[11px] font-extrabold tracking-[0.16em] text-cream uppercase transition-colors hover:bg-flame"
             >
               Go to sign in <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
             <Link
               to="/"
-              className="flex min-h-[44px] items-center justify-center rounded-full border-2 border-charcoal/12 bg-white px-5 font-display text-[11px] font-extrabold tracking-[0.16em] text-charcoal/70 uppercase transition-colors hover:border-flame hover:text-flame"
+              className="flex min-h-[44px] items-center justify-center rounded-md border-2 border-charcoal/12 bg-white px-5 font-display text-[11px] font-extrabold tracking-[0.16em] text-charcoal/70 uppercase transition-colors hover:border-flame hover:text-flame"
             >
               Back to home
             </Link>

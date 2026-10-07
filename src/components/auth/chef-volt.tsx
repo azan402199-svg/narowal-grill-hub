@@ -141,7 +141,7 @@ export function VoltScene({
           <p className="font-display text-[11px] font-extrabold tracking-[0.28em] text-flame uppercase">{eyebrow}</p>
           <h1
             id="auth-title"
-            className="mt-2 font-display text-3xl leading-none font-black tracking-tight text-charcoal uppercase sm:text-4xl"
+            className="auth-lit mt-2 font-display text-3xl leading-none font-black tracking-tight text-charcoal uppercase sm:text-4xl"
           >
             {title}
           </h1>
