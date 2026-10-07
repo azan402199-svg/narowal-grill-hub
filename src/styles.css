@@ -4260,3 +4260,12 @@ img { image-rendering: auto; }
   .menu-book-viewer { animation: none; }
   .menu-book-launcher, .mb2-sheet.is-settling { transition: none; }
 }
+
+.fly-to-cart {
+  position: fixed;
+  z-index: 300;
+  pointer-events: none;
+  object-fit: contain;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 14px 18px oklch(0.2 0.03 40 / 0.35));
+}
