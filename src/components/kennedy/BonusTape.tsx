@@ -1,6 +1,7 @@
 import { Flame, Gift, Pizza, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import truck from "@/assets/kennedy-truck.webp.asset.json";
+import truckVideo from "@/assets/kennedy-truck.webm.asset.json";
 
 type Item = { label: string; Icon: typeof Flame };
 
@@ -69,8 +70,17 @@ export function BonusTape() {
       aria-label="Today's deals and bonus offers"
     >
       {started && <div className="offer-truck" aria-hidden="true">
-        <span className="offer-truck-hitch" />
-        <img src={truck.url} alt="" width={328} height={240} decoding="async" />
+                <video
+          src={truckVideo.url}
+          poster={truck.url}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          ref={(el) => { if (el) el.playbackRate = 1.1; }}
+          onLoadedMetadata={(e) => { e.currentTarget.playbackRate = 1.1; }}
+        />
       </div>}
       <div className="ticket ticket--gold">
         <span className="ticket-badge">
