@@ -4355,3 +4355,67 @@ img { image-rendering: auto; }
   will-change: transform, opacity;
   filter: drop-shadow(0 14px 18px oklch(0.2 0.03 40 / 0.35));
 }
+
+/* ---------- Paper-plane "send code" button ---------- */
+.send-plane-wrap { position: relative; }
+.send-plane-btn {
+  position: relative; width: 100%;
+  clip-path: inset(0 0 round 0.6rem);
+  transition: clip-path .55s cubic-bezier(.65,0,.35,1), transform .15s ease;
+}
+.send-plane-btn:active:not(:disabled) { transform: scale(.94); }
+.send-plane-label, .send-plane-sent {
+  display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+  transition: transform .45s cubic-bezier(.65,0,.35,1), opacity .3s ease;
+}
+.send-plane-sent { position: absolute; inset: 0; opacity: 0; transform: translateX(-40%); }
+.send-plane-mini { width: 1.05rem; height: 1.05rem; transform: rotate(-12deg); }
+.send-plane-tick { width: 1.3rem; height: 1.3rem; stroke-dasharray: 26; stroke-dashoffset: 26; }
+
+.send-plane-sky { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; z-index: 5; }
+.send-plane-route { position: absolute; left: -160px; top: -110px; width: 320px; height: 160px; overflow: visible; }
+.send-plane-route path {
+  fill: none; stroke: var(--color-flame); stroke-width: 2.5; stroke-linecap: round;
+  stroke-dasharray: 0 600; opacity: 0;
+  filter: drop-shadow(0 0 4px color-mix(in oklab, var(--color-flame) 70%, transparent));
+}
+.send-plane-flyer {
+  position: absolute; left: 0; top: 0; width: 22px; height: 22px; margin: -11px 0 0 -11px;
+  color: var(--color-flame); opacity: 0;
+  offset-path: path("M0,0 C30,-50 90,-95 120,-60 C150,-25 70,30 30,20 C0,12 -10,-10 0,0");
+  offset-rotate: auto 45deg; offset-distance: 0%;
+  filter: drop-shadow(0 3px 6px rgb(0 0 0 / .35));
+}
+.send-plane-flyer svg { width: 100%; height: 100%; }
+
+/* flying: button squeezes into a bubble, label pops away, plane loops */
+.send-plane-wrap[data-phase="flying"] .send-plane-btn { clip-path: inset(0 calc(50% - 1.6rem) round 999px); }
+.send-plane-wrap[data-phase="flying"] .send-plane-label { transform: scale(0); opacity: 0; }
+.send-plane-wrap[data-phase="flying"] .send-plane-flyer { animation: send-plane-fly 1.3s cubic-bezier(.45,0,.25,1) infinite; }
+.send-plane-wrap[data-phase="flying"] .send-plane-route path { animation: send-plane-trail 1.3s cubic-bezier(.45,0,.25,1) infinite; }
+
+/* sent: bubble opens back, "Sent!" slides in with a drawn tick */
+.send-plane-wrap[data-phase="sent"] .send-plane-btn { animation: send-plane-pop .5s cubic-bezier(.34,1.56,.64,1); }
+.send-plane-wrap[data-phase="sent"] .send-plane-label { opacity: 0; transform: translateX(40%); }
+.send-plane-wrap[data-phase="sent"] .send-plane-sent { opacity: 1; transform: none; }
+.send-plane-wrap[data-phase="sent"] .send-plane-tick { animation: send-plane-tick .45s .2s ease-out forwards; }
+
+@keyframes send-plane-fly {
+  0% { offset-distance: 0%; opacity: 0; transform: scale(.5); }
+  12% { opacity: 1; transform: scale(1.15); }
+  80% { opacity: 1; transform: scale(1); }
+  100% { offset-distance: 100%; opacity: 0; transform: scale(.4); }
+}
+@keyframes send-plane-trail {
+  0% { stroke-dasharray: 0 600; stroke-dashoffset: 0; opacity: .9; }
+  60% { stroke-dasharray: 140 600; stroke-dashoffset: -150; opacity: .9; }
+  100% { stroke-dasharray: 0 600; stroke-dashoffset: -460; opacity: 0; }
+}
+@keyframes send-plane-pop { 0% { transform: scale(.92); } 100% { transform: scale(1); } }
+@keyframes send-plane-tick { to { stroke-dashoffset: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .send-plane-btn, .send-plane-label, .send-plane-sent { transition: none !important; }
+  .send-plane-flyer, .send-plane-route path, .send-plane-btn, .send-plane-tick { animation: none !important; }
+  .send-plane-tick { stroke-dashoffset: 0; }
+}
