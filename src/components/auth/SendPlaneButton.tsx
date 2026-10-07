@@ -30,6 +30,7 @@ export function SendPlaneButton({ sending, sent, disabled, showPlane = true, chi
       }
       setPhase("idle");
     }
+    return undefined;
   }, [sending, sent]);
 
   return (
