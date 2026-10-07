@@ -133,7 +133,7 @@ function gooeyAdded(btn: HTMLElement, reduce: boolean) {
   const count = 15;
   for (let i = 0; i < count; i++) {
     const a = ((360 + noise(8)) / count) * i * (Math.PI / 180);
-    const d0 = Math.max(r.width, r.height) / 2 + 70, d1 = 10 + noise(7);
+    const d0 = Math.max(r.width, r.height) / 2 + 28, d1 = 10 + noise(7);
     const t = 1200 + noise(600);
     fx.style.setProperty("--time", "1500ms");
     const rot = noise(10);
